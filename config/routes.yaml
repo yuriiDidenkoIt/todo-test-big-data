@@ -1,0 +1,24 @@
+api_todos_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\TodoController::index
+
+api_todos_read:
+    path: /api/todos/
+    methods: [GET]
+    controller: App\Controller\TodoController::read
+
+api_todos_update:
+    path: /api/todos/{id}
+    methods: [PUT]
+    controller: App\Controller\TodoController::update
+
+api_todos_add:
+    path: /api/todos
+    methods: [POST]
+    controller: App\Controller\TodoController::add
+
+api_todos_delete:
+    path: /api/todos/{id}
+    methods: [DELETE]
+    controller: App\Controller\TodoController::delete

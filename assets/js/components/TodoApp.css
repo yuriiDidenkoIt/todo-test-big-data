@@ -1,0 +1,16 @@
+.todo-app {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 70%;
+    box-shadow: 1vw 2vw 10vw 1vw rgba(0,0,0,0.79);
+}
+h1 {
+    font-family: "American Typewriter", serif;
+}
+h1, .todo-item {
+    text-align: center;
+}
+.todo-item {
+    font-family: "Apple Braille", serif;
+    font-size: 1.2em;
+}

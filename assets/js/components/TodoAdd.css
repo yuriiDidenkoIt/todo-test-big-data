@@ -1,0 +1,12 @@
+.todo-add {
+    display: flex;
+    height: 3vw;
+    margin-bottom: 1vw;
+}
+.check-all {
+    flex: 1;
+    text-align: center;
+}
+.todo-add-input {
+    flex: 1 1 70%;
+}

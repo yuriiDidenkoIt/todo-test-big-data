@@ -1,0 +1,30 @@
+.checkbox-competed {
+    flex: 1;
+    text-align: center;
+}
+.checkbox-competed input{
+    display: none
+}
+.checkbox-competed span {
+    height: 1.5vw;
+    width: 1.5vw;
+    border: 1px solid grey;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+.checkbox-competed input:checked + span:before {
+    content: '\2714';
+    position: absolute;
+    left: 0.1em;
+    font-size: 1.9em;
+    top: -0.3em;
+    color: #29ff1e;
+}
+
+.checkbox-competed input:checked + span {
+    border-color: #29ff1e;
+}
+.disabled {
+    opacity: 0.2;
+}

@@ -1,0 +1,8 @@
+export const ADD_TODO = "ADD_TODO";
+export const ADD_TODOS = "ADD_TODOS";
+export const UPDATE_TODO = "UPDATE_TODO";
+export const REORDER_TODOS = "REORDER_TODOS";
+export const SET_FILTER = "SET_FILTER";
+export const SET_ORDER_BY_LIKES = "SET_ORDER_BY_LIKES";
+export const UPDATE_ACTIVE_PAGE = 'UPDATE_ACTIVE_PAGE';
+export const UPDATE_TOTAL_ITEMS_COUNT = 'UPDATE_TOTAL_ITEMS_COUNT';

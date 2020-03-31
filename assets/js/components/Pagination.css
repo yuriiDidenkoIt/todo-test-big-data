@@ -1,0 +1,27 @@
+.pagination-container {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-container > div {
+    position: relative;
+    background-color: #fff;
+    color: #337ab7;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 0.2em solid #ddd;
+    padding: 0.5em 1em;
+}
+
+.pagination-container > .page-active,
+.pagination-container > div:hover {
+    color: #fff;
+    background-color: #337ab7;
+    cursor: default;
+}
+
+.disabled, .disabled:hover  {
+    opacity: 0.4;
+    background-color: #999999 !important;
+    color: #337ab7 !important;
+}

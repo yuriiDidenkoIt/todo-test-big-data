@@ -1,0 +1,21 @@
+.todo-item-container {
+    display: flex;
+}
+.todo-item-container > div{
+    /*border: 1px #5eb5e0 solid;*/
+    padding: 10px;
+}
+
+.todo-title, .todo-title-edit {
+    flex: 4;
+}
+.todo-status {
+    flex: 1;
+}
+.todo-likes {
+    flex: 1;
+}
+
+.todo-title-edit > form {
+    flex: 1 1 100%;
+}
