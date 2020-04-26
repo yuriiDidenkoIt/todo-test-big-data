@@ -17,7 +17,6 @@ class TotalItemsCount implements \JsonSerializable
 
     /**
      * TodoResult constructor.
-
      * @param array $totalItemsCount
      */
     public function __construct(array $totalItemsCount)
@@ -31,11 +30,11 @@ class TotalItemsCount implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-                'all' => $this->totalItemsCount['all_items'],
-                Todo::STATUS_NEW => $this->totalItemsCount[Todo::STATUS_NEW . '_items'],
-                Todo::STATUS_REJECTED => $this->totalItemsCount[Todo::STATUS_REJECTED . '_items'],
-                Todo::STATUS_COMPLETED => $this->totalItemsCount[Todo::STATUS_COMPLETED . '_items'],
-                Todo::STATUS_IN_PROGRESS => $this->totalItemsCount[Todo::STATUS_IN_PROGRESS . '_items'],
+            Status::ID_ALL => $this->totalItemsCount[Status::ALL . '_items'],
+            Status::ID_NEW => $this->totalItemsCount[Status::NEW . '_items'],
+            Status::ID_REJECTED => $this->totalItemsCount[Status::REJECTED . '_items'],
+            Status::ID_COMPLETED => $this->totalItemsCount[Status::COMPLETED . '_items'],
+            Status::ID_IN_PROGRESS => $this->totalItemsCount[Status::IN_PROGRESS . '_items'],
         ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\DataObject;
 
-use App\Entity\Todo;
 use App\Repository\TodoRepository;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -11,29 +10,22 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 class TodosQueryParams
 {
-    private const ORDER_BY_LIKES = 'likes_count';
-    private const ORDER_BY_ID = 'id';
     private const DEFAULT_LIMIT = 50;
 
     /**
-     * @var string
+     * @var int
      */
-    private $prevId;
+    private $activePage;
+
+    /**
+     * @var int
+     */
+    private $statusId;
 
     /**
      * @var string
      */
-    private $status;
-
-    /**
-     * @var string
-     */
-    private $likesOrderDirection;
-
-    /**
-     * @var int|null
-     */
-    private $prevLikesCount;
+    private $order;
 
     /**
      * @var int
@@ -47,54 +39,26 @@ class TodosQueryParams
      */
     public function __construct(ParameterBag $query)
     {
+        $this->activePage = $query->get('activePage', 1);
         $this->limit = $query->get('limit', self::DEFAULT_LIMIT);
-        $this->status = strtolower($query->get('status'));
-        $this->likesOrderDirection = strtoupper($query->get('orderByLikes', ''));
-        $this->prevId = $query->get('prevId', null);
-        $prevLikesCount = trim($query->get('prevLikesCount'));
-        $this->prevLikesCount = $prevLikesCount !== '' ? $prevLikesCount : null;
+        $this->statusId = (int) $query->get('statusId', 0);
+        $this->order = strtoupper($query->get('order', TodoRepository::ORDER_BY_ASC));
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getStatus(): ?string
+    public function getStatusId(): int
     {
-        return in_array($this->status, Todo::STATUSES) ? $this->status : null;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getLikesOrderDirection(): ?string
-    {
-        return in_array($this->likesOrderDirection, [TodoRepository::ORDER_BY_DESC, TodoRepository::ORDER_BY_ASC])
-            ? $this->likesOrderDirection
-            : null;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPrevId(): ?int
-    {
-        return !empty($this->prevId) ? $this->prevId : null;
+        return $this->statusId;
     }
 
     /**
      * @return string
      */
-    public function getOrderBy(): string
+    public function getOrder(): string
     {
-        return $this->getLikesOrderDirection() ? self::ORDER_BY_LIKES : self::ORDER_BY_ID;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOrderByDirection(): string
-    {
-        return $this->getLikesOrderDirection() ?? TodoRepository::ORDER_BY_DESC;
+        return $this->order;
     }
 
     /**
@@ -106,10 +70,10 @@ class TodosQueryParams
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getPrevLikesCount(): ?int
+    public function getActivePage(): int
     {
-        return $this->prevLikesCount;
+        return $this->activePage;
     }
 }

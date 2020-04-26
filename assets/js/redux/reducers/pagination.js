@@ -1,4 +1,4 @@
-import { UPDATE_ACTIVE_PAGE, UPDATE_ITEMS_COUNT_PER_PAGE, UPDATE_TOTAL_ITEMS_COUNT } from "../actionTypes";
+import { UPDATE_ACTIVE_PAGE, UPDATE_TOTAL_ITEMS_COUNT } from "../actionTypes";
 
 const initialState = {
     activePage: 1,

@@ -50,13 +50,10 @@ class TodoController extends AbstractController
 
     /**
      * @return Response
-     * @throws \Doctrine\DBAL\DBALException
      */
     public function index(): Response
     {
-        return $this->render('base.html.twig', [
-            'totalItemsCount' => $this->todoRepository->countAll(),
-        ]);
+        return $this->render('base.html.twig');
     }
 
     /**
@@ -75,7 +72,7 @@ class TodoController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request): JsonResponse
     {
         $lastTodo = null;
         try {
@@ -102,7 +99,7 @@ class TodoController extends AbstractController
      * @return JsonResponse
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function add(Request $request)
+    public function add(Request $request): JsonResponse
     {
         try {
             $todo = $this->CRUD->create($request);
@@ -121,7 +118,7 @@ class TodoController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function delete(int $id, Request $request)
+    public function delete(int $id, Request $request): JsonResponse
     {
         try {
             $this->CRUD->delete($id);

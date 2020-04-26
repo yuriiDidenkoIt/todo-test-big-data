@@ -4,7 +4,7 @@ import CheckboxCompleted from "./Atoms/CheckboxCompleted";
 import InputText from "./Atoms/InputText";
 import useUpdateTodo from "../hooks/useUpdateTodo";
 import useDeleteTodo from "../hooks/useDeleteTodo";
-import { VISIBILITY_FILTERS } from "../constants";
+import { VISIBILITY_FILTERS, VISIBILITY_FILTERS_IDS } from "../constants";
 
 import './Todo.css';
 
@@ -15,12 +15,12 @@ const Todo = ({ todo, todoIndex }) => {
     const [title, setTitle] = useState(todo.title);
 
     const toggleStatus = () => {
-        const status = [
-            VISIBILITY_FILTERS.NEW,
-            VISIBILITY_FILTERS.REJECTED,
-            VISIBILITY_FILTERS.IN_PROGRESS
-        ].includes(todo.status) ? VISIBILITY_FILTERS.COMPLETED : VISIBILITY_FILTERS.NEW;
-        updateTodo(todo.id, todoIndex, { status });
+        const statusId = [
+            VISIBILITY_FILTERS_IDS.NEW,
+            VISIBILITY_FILTERS_IDS.REJECTED,
+            VISIBILITY_FILTERS_IDS.IN_PROGRESS
+        ].includes(todo.statusId) ? VISIBILITY_FILTERS_IDS.COMPLETED : VISIBILITY_FILTERS_IDS.NEW;
+        updateTodo(todo.id, todoIndex, { statusId });
     }
 
     const updateTitle = (event) => {
@@ -33,7 +33,7 @@ const Todo = ({ todo, todoIndex }) => {
             <CheckboxCompleted
                 isDisabled={isSending}
                 name={todo.id}
-                checked={todo.status === 'completed'}
+                checked={+todo.statusId === 2}
                 onClick={toggleStatus}
             />
             <div className={classNames('todo-title', { hidden: isEditing })} onDoubleClick={() => setIsEditing(true)}>
@@ -50,10 +50,10 @@ const Todo = ({ todo, todoIndex }) => {
                 />
             </form>
             <div className="todo-status">
-                {todo.status}
+                {VISIBILITY_FILTERS[todo.statusId]}
             </div>
             <div className="todo-likes">
-                {todo.likes_count}
+                {todo.likesCount}
             </div>
             <div
                 className="todo-delete"

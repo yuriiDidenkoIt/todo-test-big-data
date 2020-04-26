@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList';
 import VisibilityFilters from './VisibilityFilters';
-import Pagination from "./Pagination";
+import Pagination from "./Pagination/Pagination";
 import TodoAdd from './TodoAdd';
 import OrderByLikes from './OrderByLikes';
 

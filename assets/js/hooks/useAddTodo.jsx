@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
-import { getActivePage, getVisibilityFilter } from '../redux/selectors';
+import { getActivePage, getActiveFilter } from '../redux/selectors';
 import axios from "axios";
-import { addTodo, updateTotalItemsCount } from "../redux/actions";
-import { VISIBILITY_FILTERS } from "../constants";
+import { addTodo, setCountsItemsByFilter, updateTotalItemsCount } from "../redux/actions";
+import { VISIBILITY_FILTERS_IDS } from "../constants";
 
 export default () => {
     const [isSending, setIsSending] = useState(false);
     const isMounted = useRef(null);
     const activePage = useSelector(getActivePage);
-    const visibilityFilter = useSelector(getVisibilityFilter);
+    const visibilityFilter = useSelector(getActiveFilter);
     const dispatch = useDispatch();
 
     const createTodo = (title, callbackAfter = null) => {
@@ -20,10 +20,11 @@ export default () => {
             .post(`/api/todos`, params)
             .then((response) => {
                 setIsSending(false);
-                if (activePage === 1 && [VISIBILITY_FILTERS.ALL, VISIBILITY_FILTERS.NEW].includes(visibilityFilter)) {
+                if (activePage === 1 && [VISIBILITY_FILTERS_IDS.ALL, VISIBILITY_FILTERS_IDS.NEW].includes(visibilityFilter)) {
                     batch(() => {
                         dispatch(addTodo(response.data.todo))
                         dispatch(updateTotalItemsCount(response.data.totalItemsCount[visibilityFilter]))
+                        dispatch(setCountsItemsByFilter(response.data.totalItemsCount));
                     })
                 }
                 if (typeof callbackAfter === 'function') {

@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setOderByLikes } from "../redux/actions";
 import FilterOrderButton from "./Atoms/FilterOrderButton";
 import { ORDER_BY_LIKES } from "../constants";
+import { getActiveOrderByLikes } from "../redux/selectors";
 
 import './VisibilityFilters.css';
-import { getActiveOrderByLikes } from "../redux/selectors";
 
 const OrderByLikes = () => {
     const activeOrder = useSelector(getActiveOrderByLikes);
@@ -14,7 +14,7 @@ const OrderByLikes = () => {
         <div className="visibility-filters">
             {Object.keys(ORDER_BY_LIKES).map(orderKey => {
                 const currentOrder = ORDER_BY_LIKES[orderKey];
-                const orderToSet = currentOrder !== activeOrder ? currentOrder : null;
+                const orderToSet = currentOrder !== activeOrder ? currentOrder : activeOrder;
                 return (
                     <FilterOrderButton
                         title={currentOrder}

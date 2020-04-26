@@ -1,5 +1,4 @@
 import { ADD_TODO, ADD_TODOS, UPDATE_TODO, REORDER_TODOS } from "../actionTypes";
-import { VISIBILITY_FILTERS } from "../../constants";
 
 const initialState = {
     todosIdsByPageId: {},
@@ -20,7 +19,7 @@ const todos = (state = initialState, action) => {
                 },
                 byIds: {
                     ...state.byIds,
-                    [todo.id]: todo
+                    [todo.id]: todo,
                 }
             };
         }
@@ -47,10 +46,7 @@ const todos = (state = initialState, action) => {
                 ...state,
                 byIds: {
                     ...state.byIds,
-                    [todo.id]: {
-                        ...state.byIds[todo.id],
-                        ...todo
-                    }
+                    [todo.id]: todo
                 }
             };
         }

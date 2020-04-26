@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import './TodoAdd.css'
 import InputText from "./Atoms/InputText";
 import useAddTodo from "../hooks/useAddTodo";
+
+import './TodoAdd.css'
 
 const TodoAdd = () => {
     const [value, setValue] = useState('');
@@ -13,7 +14,6 @@ const TodoAdd = () => {
 
     return (
         <form onSubmit={createTodo} className="todo-add">
-            {/*<CheckboxCompleted name="todoAdd" checked={checked} onClick={() => {}}/>*/}
             <InputText
                 onChange={(event) => setValue(event.target.value)}
                 value={value}

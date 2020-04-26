@@ -1,0 +1,28 @@
+App\Entity\Todo:
+  constraints:
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: id
+  properties:
+    id:
+      - Positive: ~
+    title:
+      - NotBlank: ~
+      - Type: string
+    status_id:
+      - Choice: { choices: [1, 2, 3, 4], message: Choose a valid status. }
+    likes_count:
+      - Type:
+          type: integer
+          message: The value {{ value }} is not a valid {{ type }}.
+
+App\DataObject\TodosQueryParams:
+  properties:
+    activePage:
+      - Type: [numeric, null]
+    statusId:
+      - Type: [numeric, null]
+      - Choice: { choices: [0, 1, 2, 3, 4], message: Choose a valid status. }
+    limit:
+      - Type: numeric
+    order:
+      - Type: [string, null]
+      - Choice: { choices: ['DESC', 'ASC'], message: Choose a valid orderdirection. }

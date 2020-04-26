@@ -5,6 +5,7 @@ import {
     SET_FILTER,
     UPDATE_ACTIVE_PAGE,
     SET_ORDER_BY_LIKES,
+    SET_COUNTS_ITEMS_BY_FILTER,
     REORDER_TODOS,
     UPDATE_TOTAL_ITEMS_COUNT,
 } from './actionTypes';
@@ -54,3 +55,8 @@ export const reorderTodos = (lastTodo, todoIndex, activePage) => ({
     type: REORDER_TODOS,
     payload: { lastTodo, todoIndex, activePage },
 });
+
+export const setCountsItemsByFilter = (counts) =>({
+    type: SET_COUNTS_ITEMS_BY_FILTER,
+    payload: { counts },
+})

@@ -33,8 +33,8 @@ final class Version20200330051954 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('DROP SEQUENCE todo_id_seq CASCADE');
-        $this->addSql('DROP TABLE todo');
-        $this->addSql('DROP TYPE enum_status');
+        $this->addSql('DROP SEQUENCE IF EXISTS  todo_id_seq CASCADE');
+        $this->addSql('DROP TABLE IF EXISTS todo');
+        $this->addSql('DROP TYPE IF EXISTS enum_status');
     }
 }

@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { getTodos } from "../redux/selectors";
 import Todo from "./Todo";
 import useLoadTodosFromServer from "../hooks/useLoadTodosFromServer";
+import Spinner from "./Atoms/Spinner";
 
 import './TodoList.css'
-import Spinner from "./Atoms/Spinner";
 
 const TodoList = () => {
     const isLoading = useLoadTodosFromServer();

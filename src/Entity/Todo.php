@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,20 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Todo
 {
-    public const STATUS_NEW = 'new';
-    public const STATUS_REJECTED = 'rejected';
-    public const STATUS_COMPLETED = 'completed';
-    public const STATUS_IN_PROGRESS = 'in_progress';
-    public const STATUSES = [
-        self::STATUS_NEW,
-        self::STATUS_REJECTED,
-        self::STATUS_COMPLETED,
-        self::STATUS_IN_PROGRESS,
-    ];
-
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -33,9 +22,9 @@ class Todo
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="smallint", length=15)
      */
-    private $status;
+    private $status_id;
 
     /**
      * @ORM\Column(type="integer", options={"default" : 0})
@@ -44,21 +33,22 @@ class Todo
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @var DateTimeInterface
      */
     private $created_at;
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -76,29 +66,29 @@ class Todo
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getStatus(): ?string
+    public function getStatusId(): int
     {
-        return $this->status;
+        return $this->status_id;
     }
 
     /**
-     * @param string $status
+     * @param int $status_id
      *
      * @return $this
      */
-    public function setStatus(string $status): self
+    public function setStatusId(int $status_id): self
     {
-        $this->status = $status;
+        $this->status_id = $status_id;
 
         return $this;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getLikesCount(): ?int
+    public function getLikesCount(): int
     {
         return $this->likes_count;
     }
@@ -116,22 +106,30 @@ class Todo
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->created_at;
     }
 
     /**
-     * @param \DateTimeInterface $created_at
+     * @param DateTimeInterface $created_at
      *
      * @return $this
      */
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
         return $this;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 }

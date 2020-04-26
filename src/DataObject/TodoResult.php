@@ -33,8 +33,9 @@ class TodoResult implements JsonSerializable
      */
     public function __construct(array $todos, TotalItemsCount $totalItemsCount)
     {
-        $this->todos = array_column($todos, null, 'id');
-        $this->todosIds = array_column($todos, 'id');
+        $formatted = $this->format($todos);
+        $this->todos = $formatted['todos'];
+        $this->todosIds = $formatted['todosIds'];
         $this->totalItemsCount = $totalItemsCount;
     }
 
@@ -48,5 +49,25 @@ class TodoResult implements JsonSerializable
             'todosIds' => $this->todosIds,
             'totalItemsCount' => $this->totalItemsCount,
         ];
+    }
+
+    private function format(array $todos): array
+    {
+        $result = [
+            'todos' => [],
+            'todosIds' => [],
+        ];
+        foreach ($todos as $todo) {
+            $result['todos'][$todo['id']] = [
+                'id' => $todo['id'],
+                'title' => $todo['title'],
+                'likesCount' => $todo['likes_count'],
+                'statusId' => $todo['status_id'],
+                'createdAt' => $todo['created_at'],
+            ];
+            $result['todosIds'][] = $todo['id'];
+        }
+
+        return $result;
     }
 }

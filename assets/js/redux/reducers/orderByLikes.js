@@ -1,6 +1,7 @@
 import { SET_ORDER_BY_LIKES } from "../actionTypes";
+import { ORDER_BY_LIKES } from "../../constants";
 
-const initialState = null;
+const initialState = ORDER_BY_LIKES.ASC;
 
 const orderByLikes = (state = initialState, action) => {
     switch (action.type) {
